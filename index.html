@@ -43,22 +43,26 @@
         }
 
         header {
-            padding: 40px 0 60px;
-            border-bottom: 1px solid #222;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #fff;
+            padding: 100px 0 80px;
+            border-bottom: 1px solid rgba(255, 100, 50, 0.2);
+            text-align: center;
         }
 
         .bio {
-            color: #ddd;
-            font-size: 0.95rem;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            font-size: 1.3rem;
+            line-height: 1.9;
+            background: linear-gradient(to right, #fff, #ffaa00, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
         }
 
 
@@ -207,7 +211,10 @@
             <h1>Jake</h1>
             <p class="bio">There is something extremely profound to be discovered in this
                 life. It has to do with What You Are. This is not a conceptual game. This is the most direct
-                and real investigation that can be undertaken. Take a look. Might just pay off.</p>
+                and real investigation that can be undertaken. Don't you feel that something is a bit... off? Or maybe a
+                lot? We might be making very large assumptions about reality. Assumptions that are painful, and not
+                true. Take a look - when you're ready. Reality isn't going anywhere. Who is it that is dragging this
+                corpse around? </p>
         </header>
 
         <main id="feed">
