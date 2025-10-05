@@ -70,10 +70,41 @@
             padding: 24px;
             margin-bottom: 20px;
             transition: border-color 0.2s;
+            position: relative;
         }
 
-        .post:hover {
-            border-color: #333;
+        .post::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #8b0000, #cc0000, #ff4500, #ff6347, #ffa500, #ffffff, #ffa500, #ff6347, #ff4500, #cc0000, #8b0000);
+            background-size: 300% 300%;
+            border-radius: 8px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+            animation: electricFlow 2s linear infinite;
+        }
+
+        .post:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes electricFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .post-header {
@@ -174,9 +205,9 @@
     <div class="container">
         <header>
             <h1>Jake</h1>
-            <p class="bio">I have a nagging feeling that there is something extremely profound to be discovered in this
-                life. I believe it has to do with What You Are. This is not a conceptual game. This is the most direct
-                and real investigation that can be undertaken. Might just pay off.</p>
+            <p class="bio">There is something extremely profound to be discovered in this
+                life. It has to do with What You Are. This is not a conceptual game. This is the most direct
+                and real investigation that can be undertaken. Take a look. Might just pay off.</p>
         </header>
 
         <main id="feed">
