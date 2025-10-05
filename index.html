@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Feed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://github.com/isthistruereality/site/blob/main/Mahakala.jpeg?raw=true`');
+            background-size: contain;
+            background-position: 80% 60%;
+            background-attachment: fixed;
+            opacity: 0.25;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            padding: 40px 0 60px;
+            border-bottom: 1px solid #222;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .bio {
+            color: #ddd;
+            font-size: 0.95rem;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+
+
+        .post {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+
+        .post:hover {
+            border-color: #333;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .post-type {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .post-content h2 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .post-content p {
+            color: #ccc;
+            margin-bottom: 12px;
+        }
+
+        .post-content img {
+            width: 100%;
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-top: 16px;
+            border-radius: 6px;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .post-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: #6b9eff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .post-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 16px;
+            }
+
+            header {
+                padding: 30px 0 40px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .post {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Jake</h1>
+            <p class="bio">I have a nagging feeling that there is something extremely profound to be discovered in this
+                life. I believe it has to do with What You Are. This is not a conceptual game. This is the most direct
+                and real investigation that can be undertaken. Might just pay off.</p>
+        </header>
+
+        <main id="feed">
+            <!-- Posts will be inserted here -->
+        </main>
+
+        <footer>
+            <p>Built with care · 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // Your posts data - add new posts to the top of this array
+        const posts = [
+            {
+                "type": "writing",
+                "date": "2025-10-05",
+                "title": "First Post Test.",
+                "content": "Man Claude is good."
+            },
+            {
+                "type": "video",
+                "date": "2025-10-03",
+                "title": "Reality",
+                "content": "Insane transmission.  A weapon if you watch this at the right time.",
+                "videoUrl": "https://www.youtube.com/embed/RYnUMreD3vE"
+            }
+        ];
+
+        // Render posts
+        function renderPosts() {
+            const feed = document.getElementById('feed');
+
+            posts.forEach(post => {
+                const postEl = document.createElement('article');
+                postEl.className = 'post';
+
+                let contentHTML = `
+                    <div class="post-header">
+                        <span class="post-type">${post.type}</span>
+                        <span class="post-date">${formatDate(post.date)}</span>
+                    </div>
+                    <div class="post-content">
+                        ${post.title ? `<h2>${post.title}</h2>` : ''}
+                        <p>${post.content}</p>
+                `;
+
+                if (post.imageUrl) {
+                    contentHTML += `<img src="${post.imageUrl}" alt="${post.title}">`;
+                }
+
+                if (post.videoUrl) {
+                    contentHTML += `<div class="video-embed"><iframe src="${post.videoUrl}" allowfullscreen></iframe></div>`;
+                }
+
+                if (post.linkUrl) {
+                    contentHTML += `<a href="${post.linkUrl}" class="post-link" target="_blank">${post.linkText || 'View →'}</a>`;
+                }
+
+                contentHTML += `</div>`;
+                postEl.innerHTML = contentHTML;
+                feed.appendChild(postEl);
+            });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        renderPosts();
+    </script>
+</body>
+
+</html>
